@@ -1,0 +1,15 @@
+---
+- name: update permissions
+  hosts: dbservers
+  become: yes
+  tasks:
+    - name: create new user dbservers
+      user:
+        name: dbservers
+        state: present
+    - name: change permissions
+      file:
+        group: dbservers
+        owner: dbservers
+        mode: 0644
+        path: /tmp/dev-report

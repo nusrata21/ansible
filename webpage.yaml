@@ -1,0 +1,22 @@
+---
+- name: Webpage
+  hosts: webservers
+  become: yes
+  tasks:
+    - name: yum install httpd
+      yum:
+        name: httpd
+        state: latest
+    - name: start/enable services
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+    - name: create a webpage file
+      file:
+        state: touch
+        path: /var/www/html/index.html
+    - name: add line in file
+      lineinfile: 
+        path: /var/www/html/index.html
+        line: "I created this with ansible"

@@ -1,0 +1,14 @@
+---
+- name: Create file for users
+  hosts: all
+  become: yes #best practice sudo priveleges#
+  tasks:
+   - name: create user
+     user: #module
+        name: james
+        state: present  
+   - name: create file
+     file: #module
+        state: touch
+        path: /home/james/jamesfile
+   
